@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from utils.auth import verify_password, create_access_token, create_refresh_token
+from utils.auth import verify_password, create_access_token, create_refresh_token, verify_refresh_token
 from schemas.token import Token
 from schemas.users import UserLogin
 from database import get_db
@@ -23,6 +23,28 @@ def login_for_access_token(user_login: UserLogin, db: Session = Depends(get_db))
 
     access_token = create_access_token({"sub": user.email})
     refresh_token = create_refresh_token({"sub": user.email})
+
+    return Token(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_type="bearer"
+    )
+
+
+@router.post("/refresh", response_model=Token)
+def refresh_access_token(refresh_token: str, db: Session = Depends(get_db)):
+
+    payload = verify_refresh_token(refresh_token)
+    if not payload:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid refresh token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    user_email = payload.get("sub")
+
+    access_token = create_access_token({"sub": user_email})
 
     return Token(
         access_token=access_token,
