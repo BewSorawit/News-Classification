@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, timezone
 from database import Base
 
 
@@ -15,7 +15,8 @@ class News(Base):
     editor_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     news_type_id = Column(Integer, ForeignKey("news_types.id"))
 
-    upload_date = Column(DateTime, default=datetime.utcnow, nullable=True)
+    upload_date = Column(DateTime, default=datetime.now(
+        timezone.utc), nullable=True)
     verify_date = Column(DateTime, default=None, nullable=True)
     categories = Column(String(255), index=True)
 
