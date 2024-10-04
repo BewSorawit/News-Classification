@@ -3,8 +3,9 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from models.typer_user import TyperUser
 from models.user import User
-from schemas.users import UserCreate, UserUpdate
+from schemas.users import UserCreate, UserUpdate, UserResponse
 from utils.auth import hash_password
+
 
 
 def create_user(db: Session, user: UserCreate):

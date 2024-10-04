@@ -4,7 +4,7 @@ from models.user import User
 from models.news import News
 from models.typer_user import TyperUser
 from models.news_type import NewsType
-from routers.user import router as user_router
+from routers.admin import router as user_router
 from routers.auth import router as auth_router
 
 import uvicorn

@@ -10,7 +10,8 @@ class User(Base):
     username = Column(String(255), unique=True, index=True)
     password = Column(String(255))
     email = Column(String(255), unique=True, index=True)
-    typer_user_id = Column(Integer, ForeignKey("typer_users.id"))
+    typer_user_id = Column(Integer, ForeignKey(
+        "typer_users.id"), nullable=False)
 
     typer_user = relationship("TyperUser", back_populates="users")
     written_news = relationship(

@@ -5,9 +5,9 @@ from enum import Enum as PyEnum
 
 
 class StatusEnum(PyEnum):
-    upload = "upload"
-    public = "public"
-    unapprove = "unapprove"
+    upload = "Upload"
+    public = "Public"
+    unapprove = "Unapprove"
 
 
 class NewsType(Base):

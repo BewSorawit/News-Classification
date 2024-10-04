@@ -5,10 +5,10 @@ from enum import Enum as PyEnum
 
 
 class RoleEnum(PyEnum):
-    admin = "admin"
-    editor = "editor"
-    writer = "writer"
-    viewer = "viewer"
+    admin = "Admin"
+    editor = "Editor"
+    writer = "Writer"
+    viewer = "Viewer"
 
 
 class TyperUser(Base):
