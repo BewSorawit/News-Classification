@@ -1,2 +1,5 @@
 /.venv
 *.pyc
+TF-IDF.ipynb
+alice.txt
+GloVe.ipynb
