@@ -18,7 +18,8 @@ class News(Base):
     upload_date = Column(DateTime, default=datetime.now(
         timezone.utc), nullable=True)
     verify_date = Column(DateTime, default=None, nullable=True)
-    categories = Column(String(255), index=True)
+    category_level_1 = Column(String(255), index=True)
+    category_level_2 = Column(String(255), index=True)
 
     writer = relationship("User", foreign_keys=[
                           writer_id], back_populates="written_news")
