@@ -1,7 +1,5 @@
 from sqlalchemy.orm import Session
-from fastapi import HTTPException, status
-from models.news import News
-from schemas.news import NewsCreate, NewsResponse
+from fastapi import HTTPException
 from models.news_type import NewsType, StatusEnum
 
 

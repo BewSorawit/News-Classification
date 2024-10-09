@@ -12,15 +12,22 @@ class NewsCreate(NewsBase):
     pass
 
 
-class NewsResponse(NewsBase):
+class NewsUpdate(NewsBase):
+
+    reason: Optional[str] = None
+
+
+class NewsResponse(BaseModel):
     id: int
+    title: str
+    content: str
     writer_id: int
     editor_id: Optional[int] = None
     news_type_id: int
     upload_date: datetime
+    verify_date: Optional[datetime] = None
     category_level_1: str
     category_level_2: Optional[str] = None
-    verify_date: Optional[datetime] = None
     reason: Optional[str] = None
 
     class Config:
