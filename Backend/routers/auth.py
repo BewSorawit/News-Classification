@@ -22,8 +22,11 @@ def login_for_access_token(user_login: UserLogin, db: Session = Depends(get_db))
         )
 
     access_token = create_access_token(
-        {"sub": user.email, "typer_user_id": user.typer_user_id})
-    refresh_token = create_refresh_token({"sub": user.email})
+        {"sub": user.id}
+    )
+    refresh_token = create_refresh_token(
+        {"sub": user.id}
+    )
 
     return Token(
         access_token=access_token,
@@ -53,7 +56,8 @@ def refresh_access_token(refresh_token: str, db: Session = Depends(get_db)):
             detail="User not found",
         )
     new_access_token = create_access_token(
-        {"sub": user.email, "typer_user_id": user.typer_user_id})
+        {"sub": user.id}
+    )
 
     return Token(
         access_token=new_access_token,
