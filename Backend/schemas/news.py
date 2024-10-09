@@ -12,9 +12,11 @@ class NewsCreate(NewsBase):
     pass
 
 
-class NewsUpdate(NewsBase):
-
+class NewsUpdate(BaseModel):
+    news_type_id: int
     reason: Optional[str] = None
+    category_level_1: Optional[int] = None
+    category_level_2: Optional[int] = None
 
 
 class NewsResponse(BaseModel):
@@ -26,8 +28,8 @@ class NewsResponse(BaseModel):
     news_type_id: int
     upload_date: datetime
     verify_date: Optional[datetime] = None
-    category_level_1: str
-    category_level_2: Optional[str] = None
+    category_level_1: int
+    category_level_2: Optional[int] = None
     reason: Optional[str] = None
 
     class Config:
@@ -47,3 +49,8 @@ class NewsCreatedDataResponse(BaseModel):
 class NewsCreatedResponse(BaseModel):
     success: bool
     data: NewsCreatedDataResponse
+
+
+class NewsUpdateResponse(BaseModel):
+    success: bool
+    data: NewsResponse
