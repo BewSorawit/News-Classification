@@ -18,11 +18,16 @@ class News(Base):
     upload_date = Column(DateTime, default=datetime.now(
         timezone.utc))
     verify_date = Column(DateTime, default=None, nullable=True)
-    category_level_1 = Column(String(255), index=True)
-    category_level_2 = Column(String(255), index=True, nullable=True)
+
+    category_level_1 = Column(Integer, ForeignKey("categories.id"))
+    category_level_2 = Column(
+        Integer, ForeignKey("categories.id"), nullable=True)
 
     writer = relationship("User", foreign_keys=[
                           writer_id], back_populates="written_news")
     editor = relationship("User", foreign_keys=[
                           editor_id], back_populates="edited_news")
     news_type = relationship("NewsType", back_populates="news")
+
+    category_1 = relationship("Category", foreign_keys=[category_level_1])
+    category_2 = relationship("Category", foreign_keys=[category_level_2])
