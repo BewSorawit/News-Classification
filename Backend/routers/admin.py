@@ -43,7 +43,6 @@ def read_all_users(
             detail="You do not have permission to view users.",
         )
 
-    # Fetch all users
     users = get_all_users(db)
     return users
 
