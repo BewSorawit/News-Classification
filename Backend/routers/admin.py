@@ -28,10 +28,10 @@ def get_admin_user(db: Session, current_user: dict):
 def create_new_user(
     user: UserCreate,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(get_current_user)
+    # current_user: dict = Depends(get_current_user)
 ):
 
-    get_admin_user(db, current_user)
+    # get_admin_user(db, current_user)
     return create_user(db=db, user=user)
 
 
@@ -59,7 +59,7 @@ def update_user_endpoint(
     return updated_user
 
 
-@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{user_id}", status_code=status.HTTP_200_OK)
 def remove_user(
     user_id: int,
     db: Session = Depends(get_db),
