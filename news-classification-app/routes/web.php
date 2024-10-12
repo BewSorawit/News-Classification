@@ -4,19 +4,23 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 
 
 #                                                            for call
-Route::get('/welcome', function () { return view('welcome'); })->name('home');
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('home');
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::redirect('/welcom', '/welcome'); // redirect ไปยังหน้า home
 Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า home
+Route::redirect('/home', '/'); // redirect ไปยังหน้า home
 
+// Route::get('/home',[HomeController::class , 'index']);
 
 # sample
 // Route::controller(PostController::class)
