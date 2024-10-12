@@ -59,7 +59,7 @@ def update_user_endpoint(
     return updated_user
 
 
-@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{user_id}", status_code=status.HTTP_200_OK)
 def remove_user(
     user_id: int,
     db: Session = Depends(get_db),
