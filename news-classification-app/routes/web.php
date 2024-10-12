@@ -7,20 +7,31 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 
+// require __DIR__.'/auth.php';
 
-#                                                            for call
+# all of this to get homepage
+Route::get('/', function (Request $request) {
+    return $request->home();
+})->name('home');
+
+
+# all of this to get homepage
 Route::get('/welcome', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/', function () {
+# all of this to get homepage
+Route::get('/home', function () {
     return view('welcome');
 })->name('home');
 
-Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า home
-Route::redirect('/home', '/'); // redirect ไปยังหน้า home
 
 // Route::get('/home',[HomeController::class , 'index']);
+
+
+// Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า home
+// Route::redirect('/home', '/'); // redirect ไปยังหน้า home
+
 
 # sample
 // Route::controller(PostController::class)
