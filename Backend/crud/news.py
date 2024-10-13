@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from fastapi import HTTPException
+from fastapi import HTTPException,status
 from sqlalchemy.orm import Session
 from schemas.category import CategoryCreate
 from crud.categories import create_category, get_category_by_name
@@ -70,3 +70,17 @@ def update_news(db: Session, news_id: int, news_update: NewsUpdate, editor_id: i
     db.commit()
     db.refresh(news_item)
     return news_item
+
+def getAll(db: Session,) -> News:
+    return db.query(News).all()
+
+def getNewsById(db: Session,news_id) -> News:
+    news = db.query(News).filter(News.id == news_id).first()
+
+    if not news:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="News not found"
+        )
+    
+    return news
