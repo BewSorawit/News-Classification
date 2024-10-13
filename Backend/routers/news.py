@@ -8,7 +8,7 @@ from utils.auth import get_current_user
 from schemas.news import NewsCreatedResponse, NewsCreate, NewsUpdate, NewsUpdateResponse, NewsResponse
 from database import get_db
 from models.news import News
-from crud.news import create_news, update_news, getAll
+from crud.news import create_news, update_news, getAll, getNewsById
 
 router = APIRouter()
 
@@ -49,6 +49,16 @@ def get_viewer_user(db: Session, current_user: dict) -> Optional[User]:
         )
 
     return user_id
+
+@router.get('/{news_id}', response_model=NewsResponse)
+def get_news_by_id_item(
+    news_id: int,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    get_viewer_user(db, current_user)
+    news = getNewsById(db,news_id)
+    return news
 
 @router.get('/', response_model=list[NewsResponse])
 def get_all_news_item(
