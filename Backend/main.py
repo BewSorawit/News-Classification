@@ -18,8 +18,8 @@ app.add_middleware(
     allow_methods=[""],
     allow_headers=["*"],
 )
-Base.metadata.create_all(bind=engine)
 
+Base.metadata.create_all(bind=engine)
 
 app.include_router(admin_router, prefix='/users', tags=['users'])
 app.include_router(new_router, prefix='/news', tags=['news'])
