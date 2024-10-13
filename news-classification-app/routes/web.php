@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 // require __DIR__.'/auth.php';
 
 # all of this to get homepage
-Route::get('/', function (Request $request) {
-    return $request->home();
+Route::get('/', function () {
+    return view('welcome');
 })->name('home');
 
 
