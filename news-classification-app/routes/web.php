@@ -45,9 +45,9 @@ Route::get('/login',[LoginController::class , 'create']) -> name('login');
 // })->name('create.news');
 
 
-// Route::get('/news', function () {
-//     return view('news');
-// });
+Route::get('/news', function () {
+    return view('news');
+});
 
 // Route::get('/news/{id}', function ($id) {
 //     return view('show', ['id' => $id]); // ส่งค่า id ไปที่ view

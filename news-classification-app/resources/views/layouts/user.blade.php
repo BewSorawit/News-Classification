@@ -23,7 +23,7 @@
         <div class="container-fluid">
                 <a class="navbar-brand" href="/">JOBIE</a>
 
-                <ul class="navbar-nav">
+                {{-- <ul class="navbar-nav">
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('findUser', ['workType' => 'work']) }}">ค้นหาผู้หางาน</a>
@@ -32,7 +32,8 @@
                         <a class="nav-link" href="{{ route('findUser', ['workType' => 'intern']) }}">ค้นหานักศึกษาฝึกงาน</a>
                     </li>
 
-                </ul>
+                </ul> --}}
+
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
