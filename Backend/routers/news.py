@@ -35,7 +35,7 @@ def get_news_type_item(
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
 ):
-    get_viewer_user(db, current_user)
+    get_editor_user(db, current_user)
     news_all = getByType(db)
     return news_all
 
