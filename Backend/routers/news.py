@@ -30,7 +30,7 @@ def get_all_news_item(
     news_all = getAll(db)
     return news_all
 
-@router.get('/{status}', response_model=list[NewsResponse])
+@router.get('/type/{status}', response_model=list[NewsResponse])
 def get_news_type_item(
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_user)
