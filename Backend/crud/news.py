@@ -76,6 +76,10 @@ def update_news(db: Session, news_id: int, news_update: NewsUpdate, editor_id: i
 def getAll(db: Session,) -> News:
     return db.query(News).all()
 
+def getByType(db: Session,news_type_id ) -> News:
+    return db.query(News).filter(News.news_type_id==news_type_id).all()
+
+
 
 def getNewsById(db: Session, news_id) -> News:
     news = db.query(News).filter(News.id == news_id).first()
