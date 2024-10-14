@@ -42,8 +42,8 @@ def get_editor_user(db: Session, current_user: dict) -> Optional[User]:
 def get_viewer_user(db: Session, current_user: dict) -> Optional[User]:
     user_id = current_user.get("sub")
     typer_user = get_typer_user_by_id(db, user_id)
-    print(typer_user)
-    if not typer_user or typer_user.role != RoleEnum.viewer:
+    print(typer_user.role)
+    if not typer_user or (typer_user.role not in [RoleEnum.viewer, RoleEnum.writer, RoleEnum.editor, RoleEnum.admin]):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You are not authorized to view news.",
