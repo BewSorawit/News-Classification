@@ -40,6 +40,17 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+  /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $this->middleware('guest');
+    }
+
+
     /**
      * Get a validator for an incoming registration request.
      *

@@ -33,4 +33,4 @@ app.include_router(typer_user_router, prefix='/typer_user_router',
 app.include_router(auth_router)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, log_level="info", reload=True)
+    uvicorn.run("main:app", port=8001, log_level="info", reload=True)

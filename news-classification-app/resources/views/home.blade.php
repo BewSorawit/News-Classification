@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    NEWS-Classifi
+    NEWS-Classification
 @endsection
 
 @section('content')
