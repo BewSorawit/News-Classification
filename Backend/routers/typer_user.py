@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from crud.typer_user import get_role_user_login, get_typer_user
-from schemas.typer_user import TyperUserResponse
+from schemas.typer_user import TyperUserBase, TyperUserResponse
 from routers.user_permissions import get_admin_user
 from utils.auth import get_current_user
 from database import get_db
@@ -24,7 +24,7 @@ def get_all_typer_user(
     return typer_users
 
 
-@router.get("/role", response_model=dict)
+@router.get("/role", response_model=TyperUserBase)
 def get_user_role(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     role = get_role_user_login(db, current_user)
 
