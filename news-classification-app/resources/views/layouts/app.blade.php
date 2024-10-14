@@ -22,6 +22,8 @@
 
 </head>
 <body>
+
+
     <nav class="navbar navbar-expand-lg" style="background-color: #efefef;">
         <div class="container-fluid">
 
@@ -39,7 +41,8 @@
 
 
             {{-- ถ้าไม่มีการ login จะเข้าหน้านี้  --}}
-            @if (!Auth::check())
+            {{-- !Auth::check() --}}
+            @if ( =="" )
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('login')}}">เข้าสู่ระบบ</a>
@@ -53,7 +56,8 @@
             @else
                 {{-- {{ $data= Auth()->user()->userType }} return userType  --}}
                           {{-- Auth()->company()->compID --}}
-                @if (  ( Auth()->user()->userType ) == ("admin")  )
+                          {{-- ( Auth()->user()->userType ) == ("admin") --}}
+                @if (  == ("admin") )
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,6 +71,7 @@
                                     }
                                 </style>
                             </a>
+
                             <ul class="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item" href="{{route('register')}}">
@@ -102,53 +107,6 @@
                             </ul>
                         </li>
                     </ul>
-
-                    <script>
-                        $(document).ready(function() {
-                            // ดึง token จาก Local Storage
-                            const accessToken = localStorage.getItem('access_token');
-
-                            $.ajax({
-                                url: 'http://localhost:8001/news/',  // URL ของ API
-                                method: 'GET',
-                                headers: {
-                                    'Authorization': `Bearer ${accessToken}` // แนบ token ใน header
-                                },
-                                success: function(data) {
-                                    const newsList = $('#news-list');
-                                    data.forEach(item => {
-                                        newsList.append(`
-                                            <div class="list-group-item">
-                                                <h5 class="mb-1">
-                                                    <a href="/news/${item.id}" class="text-decoration-none">${item.title}</a>
-                                                </h5>
-                                                <p class="mb-1">
-                                                    <span class="badge badge-primary">${item.category_level_1}</span>
-                                                    <span class="badge badge-secondary">${item.category_level_2}</span>
-                                                </p>
-                                            </div>
-                                        `);
-                                    });
-                                },
-                                error: function() {
-                                    alert('ไม่สามารถดึงข้อมูลข่าวได้');
-                                }
-                            });
-
-
-                            // จัดการการคลิกปุ่มล็อกเอาท์
-                            $('#logout-button').on('click', function() {
-                                // ล้าง token จาก Local Storage
-                                localStorage.removeItem('access_token');
-                                localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
-
-                                // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                                window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
-                            });
-
-
-                        });
-                    </script>
 
 
                 @elif (  ( Auth()->user()->userType ) == ("editor")  )
@@ -273,13 +231,47 @@
 
         </div>
         </div>
-      </nav>
+    </nav>
 
-      <div class="container py-2">
+
+    <div class="container py-2">
             @yield('content')
-      </div>
+    </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const accessToken = localStorage.getItem('access_token');
+            if (accessToken) {
+                window.location.href = '/news';
+            }
+
+            $('#login-form').on('submit', function(e) {
+                e.preventDefault();  // ป้องกันการ reload หน้า
+
+                const email = $('#email').val();
+                const password = $('#password').val();
+
+                $.ajax({
+                    url: 'http://localhost:8001/typer_user_router/role',
+                    method: 'GET',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}` // แนบ token ใน header
+                    },
+                    data: JSON.stringify({ email: email, password: password }),
+                    success: function(data) {
+                        console.log(data)
+                    },
+                    error: function() {
+                        $('#error-message').text('อีเมลหรือรหัสผ่านไม่ถูกต้อง');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
