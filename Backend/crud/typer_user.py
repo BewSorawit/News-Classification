@@ -9,3 +9,7 @@ def get_typer_user_by_id(db: Session, user_id: int) -> Optional[TyperUser]:
     if user_db is None:
         return None
     return db.query(TyperUser).filter(TyperUser.id == user_db.typer_user_id).first()
+
+
+def get_typer_user(db: Session) -> list[TyperUser]:
+    return db.query(TyperUser).all()
