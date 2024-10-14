@@ -21,8 +21,6 @@ def get_admin_user(db: Session, current_user: dict):
 
     return typer_user
 
-# admin
-
 
 @router.post("/", response_model=UserResponse)
 def create_new_user(
