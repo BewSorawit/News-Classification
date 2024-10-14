@@ -13,3 +13,10 @@ def get_typer_user_by_id(db: Session, user_id: int) -> Optional[TyperUser]:
 
 def get_typer_user(db: Session) -> list[TyperUser]:
     return db.query(TyperUser).all()
+
+
+def get_role_user_login(db: Session, current_user: dict):
+    db_new = db.query(User).filter(User.id == current_user['sub']).first()
+    if db_new is not None and db_new.typer_user:
+        return db_new.typer_user.role
+    return None

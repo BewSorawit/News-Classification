@@ -5,7 +5,7 @@ from routers.user_permissions import get_editor_user, get_viewer_user, get_write
 from utils.auth import get_current_user
 from schemas.news import NewsCreatedResponse, NewsCreate, NewsUpdate, NewsUpdateResponse, NewsResponse
 from database import get_db
-from crud.news import create_news, update_news, getAll, getNewsById
+from crud.news import writerGetAll, create_news, update_news, getAll, getNewsById
 
 router = APIRouter()
 
@@ -59,3 +59,13 @@ def update_news_item(
     updated_news = update_news(db, news_id, news_update, editor_id)
 
     return NewsUpdateResponse(success=True, data=updated_news)
+
+
+@router.get('/writer/', response_model=list[NewsResponse])
+def writer_get_all_news_item(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    writer_id = get_writer_user(db, current_user)
+    news_all = writerGetAll(db, writer_id=writer_id)
+    return news_all
