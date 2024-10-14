@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\NewsController;
 
 #                                                            for call
 Route::get('/welcome', function () { return view('welcome'); })->name('home');
@@ -16,6 +16,30 @@ Route::get('/', function () {
 
 Route::redirect('/welcom', '/welcome'); // redirect ไปยังหน้า home
 Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า home
+
+
+
+
+
+Route::get('/create-news', function () {
+    return view('create-news');
+})->name('create.news');
+
+
+Route::get('/news', function () {
+    return view('news');
+});
+Route::get('/news/{id}', function ($id) {
+    return view('show', ['id' => $id]); // ส่งค่า id ไปที่ view
+});
+
+Route::get('/login', function () {
+    return view('test-login');  
+});
+
+Route::get('/register', function () {
+    return view('register'); 
+});
 
 
 # sample
