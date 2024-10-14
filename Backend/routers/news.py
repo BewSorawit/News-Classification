@@ -38,17 +38,19 @@ def get_editor_user(db: Session, current_user: dict) -> Optional[User]:
 
     return user_id
 
+
 def get_viewer_user(db: Session, current_user: dict) -> Optional[User]:
     user_id = current_user.get("sub")
     typer_user = get_typer_user_by_id(db, user_id)
-
-    if not typer_user or typer_user.role != RoleEnum.writer:
+    print(typer_user)
+    if not typer_user or typer_user.role != RoleEnum.viewer:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="You are not authorized to view news.",
         )
 
     return user_id
+
 
 @router.get('/{news_id}', response_model=NewsResponse)
 def get_news_by_id_item(
@@ -57,8 +59,9 @@ def get_news_by_id_item(
     current_user: dict = Depends(get_current_user)
 ):
     get_viewer_user(db, current_user)
-    news = getNewsById(db,news_id)
+    news = getNewsById(db, news_id)
     return news
+
 
 @router.get('/', response_model=list[NewsResponse])
 def get_all_news_item(
@@ -68,6 +71,7 @@ def get_all_news_item(
     get_viewer_user(db, current_user)
     news_all = getAll(db)
     return news_all
+
 
 @router.post('/', response_model=NewsCreatedResponse, status_code=status.HTTP_201_CREATED)
 def create_news_item(
