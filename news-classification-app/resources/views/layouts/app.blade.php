@@ -44,11 +44,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('login')}}">เข้าสู่ระบบ</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{route('register')}}">
                             <button type="button" class="btn btn-primary btn-sm">สมัครสมาชิก</button>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             @else
                 {{-- {{ $data= Auth()->user()->userType }} return userType  --}}
@@ -68,11 +68,22 @@
                                 </style>
                             </a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{route('register')}}">
+                                        <button type="button" class="btn btn-primary btn-sm">สมัครสมาชิกเพิ่ม</button>
+                                    </a>
+                                </li>
                                 <li><a class="dropdown-item" href="{{route('user.show')}}">โปรไฟล์</a></li>
                                 <li><a class="dropdown-item" href="{{route('user.edit')}}">ตั้งค่าโปรไฟล์</a></li>
                                 {{-- <li><a class="dropdown-item" href="#">คำเชิญจากบริษัท</a></li> --}}
 
                                 <li>
+                                    <button id="logout-button" class="btn btn-danger" >
+                                        ออกจากระบบ
+                                    </button>
+                                </li>
+
+                                {{-- <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item" :href="route('logout')"
@@ -81,7 +92,7 @@
                                                 {{ __('ออกจากระบบ') }}
                                         </button>
                                 </form>
-                                </li>
+                                </li> --}}
 
                                 <style>
                                     .dropdown-menu{
@@ -91,6 +102,52 @@
                             </ul>
                         </li>
                     </ul>
+
+                    <script>
+                        $(document).ready(function() {
+                            // ดึง token จาก Local Storage
+                            const accessToken = localStorage.getItem('access_token');
+
+                            $.ajax({
+                                url: 'http://localhost:8001/news/',  // URL ของ API
+                                method: 'GET',
+                                headers: {
+                                    'Authorization': `Bearer ${accessToken}` // แนบ token ใน header
+                                },
+                                success: function(data) {
+                                    const newsList = $('#news-list');
+                                    data.forEach(item => {
+                                        newsList.append(`
+                                            <div class="list-group-item">
+                                                <h5 class="mb-1">
+                                                    <a href="/news/${item.id}" class="text-decoration-none">${item.title}</a>
+                                                </h5>
+                                                <p class="mb-1">
+                                                    <span class="badge badge-primary">${item.category_level_1}</span>
+                                                    <span class="badge badge-secondary">${item.category_level_2}</span>
+                                                </p>
+                                            </div>
+                                        `);
+                                    });
+                                },
+                                error: function() {
+                                    alert('ไม่สามารถดึงข้อมูลข่าวได้');
+                                }
+                            });
+
+
+                            // จัดการการคลิกปุ่มล็อกเอาท์
+                            $('#logout-button').on('click', function() {
+                                // ล้าง token จาก Local Storage
+                                localStorage.removeItem('access_token');
+                                localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
+
+                                // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
+                                window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                            });
+                        });
+                    </script>
+
 
                 @elif (  ( Auth()->user()->userType ) == ("editor")  )
                     <ul class="navbar-nav ms-auto">
