@@ -8,16 +8,28 @@ from models.categories import Category
 from routers.admin import router as admin_router
 from routers.auth import router as auth_router
 from routers.news import router as new_router
+from routers.categories import router as category_router
+from routers.typer_user import router as typer_user_router
 
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[""],
+    allow_methods=[""],
+    allow_headers=["*"],
+)
 
 Base.metadata.create_all(bind=engine)
 
-
 app.include_router(admin_router, prefix='/users', tags=['users'])
 app.include_router(new_router, prefix='/news', tags=['news'])
+app.include_router(category_router, prefix='/categories', tags=['categories'])
+app.include_router(typer_user_router, prefix='/typer_user_router',
+                   tags=['typer_user_router'])
+
 app.include_router(auth_router)
 
 if __name__ == "__main__":

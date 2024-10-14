@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from routers.user_permissions import get_admin_user
 from utils.auth import get_current_user
 from database import get_db
 from schemas.users import UserCreate, UserResponse, UserUpdate
@@ -7,21 +8,6 @@ from crud.users import create_user, get_all_users, delete_user, update_user
 from crud.typer_user import get_typer_user_by_id
 from models.typer_user import RoleEnum
 router = APIRouter()
-
-
-def get_admin_user(db: Session, current_user: dict):
-    user_id = current_user.get("sub")
-    typer_user = get_typer_user_by_id(db, user_id)
-
-    if not typer_user or typer_user.role != RoleEnum.admin:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="You do not have permission to perform this action.",
-        )
-
-    return typer_user
-
-# admin
 
 
 @router.post("/", response_model=UserResponse)
