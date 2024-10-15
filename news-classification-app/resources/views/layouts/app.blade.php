@@ -79,7 +79,15 @@
                 </div> --}}
 
 
-
+                <div  class="writer-item mt-2">
+                    <li class="writer-item nav-item"  >
+                        <a class=" writer-item nav-link " href="{{route('create.news')}}">
+                            {{-- <button type="button" class="btn btn-primary btn-sm"> --}}
+                                สมัครสมาชิก
+                            {{-- </button> --}}
+                        </a>
+                    </li>
+                </div>
 
 
 
