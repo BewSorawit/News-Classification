@@ -15,3 +15,5 @@ def get_news_type_by_status(db: Session, status: StatusEnum) -> NewsType:
 
 def getAll(db: Session) -> NewsType:
     return db.query(NewsType).all()
+
+

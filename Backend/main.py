@@ -36,4 +36,4 @@ app.include_router(news_type_router, prefix='/news_type',
 app.include_router(auth_router)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, log_level="info", reload=True)
+    uvicorn.run("main:app", port=8001, log_level="info", reload=True)
