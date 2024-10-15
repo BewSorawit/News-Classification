@@ -46,19 +46,33 @@ Route::get('/news', function () {
 
 
 Route::get('/create-news', function () {
-return view('create-news');
-})->name('create.news');
+    return view('create-news');
+})->name('create.news'); // for writer
+
+
+Route::get('/news', function () {
+    return view('news'); //for viewer,writer,editor
+});
 
 Route::get('/news/{id}', function ($id) {
-    return view('show', ['id' => $id]); // ส่งค่า id ไปที่ view
+    return view('show', ['id' => $id]); //for viewer,writer,editor
 });
 
+Route::get('/login', function () {
+    return view('test-login');
+});
+
+Route::get('/register', function () {
+    return view('register');  //admin
+});
 Route::get('/unlogin', function () {
-    return view('unlogin'); // ใช้ชื่อไฟล์ view ที่สร้างขึ้น
+    return view('unlogin'); // เช็คว่าloginไหม
 });
-
 Route::get('/edit-news/{id}', function ($id) {
-    return view('edit-news', ['id' => $id]); // ส่งค่า id ไปที่ view
+    return view('edit-news', ['id' => $id]); // editor
+});
+Route::get('/user', function () {
+    return view('user'); // admin
 });
 
 
