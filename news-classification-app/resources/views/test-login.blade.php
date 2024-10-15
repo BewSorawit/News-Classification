@@ -43,10 +43,28 @@
                     contentType: 'application/json',
                     data: JSON.stringify({ email: email, password: password }),
                     success: function(data) {
+                        // บันทึก access token และ refresh token ลงใน localStorage
                         localStorage.setItem('access_token', data.access_token);
                         localStorage.setItem('refresh_token', data.refresh_token);
 
-                        location.replace('/news');
+                        // ตรวจสอบ role ของผู้ใช้
+                        $.ajax({
+                            url: 'http://localhost:8001/typer_user_router/role',
+                            method: 'GET',
+                            headers: { 'Authorization': `Bearer ${data.access_token}` },
+                            success: function(roleData) {
+                                
+                                    if (roleData.role === 'Admin') {
+                                        window.location.href = '/user'; // ถ้าเป็น admin เรียกหน้า user
+                                    } else if (roleData.role !== 'Admin') {
+                                        window.location.href = '/news'; // ถ้าไม่ใช่ admin เรียกหน้า news
+                                    }
+                               
+                            },
+                            error: function() {
+                                $('#error-message').text('ไม่สามารถตรวจสอบบทบาทผู้ใช้ได้');
+                            }
+                        });
                     },
                     error: function() {
                         $('#error-message').text('อีเมลหรือรหัสผ่านไม่ถูกต้อง');
