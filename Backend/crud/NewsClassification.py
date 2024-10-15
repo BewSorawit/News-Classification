@@ -147,8 +147,10 @@ def predictByBjk(data):
     dataClean = clean_text(data)
     X_new_encoded = regular_encode(dataClean, tokenizer, maxlen=maxlen)
     pred = model_category_level_1.predict(X_new_encoded)
+    print(pred)
     getLabel = select2Over85(pred[0])
     getTextLabel = sendLabelFake(getLabel)
+    print(getTextLabel)
     return getTextLabel
 
 # print(predictByBjk("The Biden administration sent a letter to the Israeli government demanding it act to improve the humanitarian situation in Gaza within the next 30 days or risk violating US laws governing foreign military assistance, suggesting US military aid could be in jeopardy. The Sunday letter, jointly written by US Secretary of State Antony Blinken and Secretary of Defense Lloyd Austin,  is addressed to Israeli Minister of Defense Yoav Gallant and Minister of Strategic Affairs Ron Dermer. It marks a significant new step by the US to try to compel Israel to facilitate the delivery of humanitarian aid into Gaza."))

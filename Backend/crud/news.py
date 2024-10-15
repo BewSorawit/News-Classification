@@ -15,7 +15,7 @@ def create_news(db: Session, news: NewsCreate, writer_id: int) -> News:
 
     data = news.title+' . '+news.content
     pred = predictByBjk(data)
-    
+    print("pred",pred)
 
     news_type = get_news_type_by_status(db, StatusEnum.upload)
 
