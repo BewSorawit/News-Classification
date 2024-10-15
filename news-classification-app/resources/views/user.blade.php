@@ -85,6 +85,10 @@
                                     // วนลูปผ่านผู้ใช้
                                     users.forEach(user => {
                                         const userRole = roleMap[user.typer_user_id] || 'ไม่มีบทบาท'; // ตรวจสอบ role
+
+                                        // Skip users with 'Admin' role
+                                        if (userRole === 'Admin') return;
+
                                         const row = `
                                             <tr data-id="${user.id}"> <!-- Store user ID in the row for easy access -->
                                                 <td><span class="username">${user.username}</span><input type="text" class="form-control edit-username" value="${user.username}" style="display:none;"></td>
