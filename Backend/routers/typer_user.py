@@ -33,3 +33,25 @@ def get_user_role(db: Session = Depends(get_db), current_user: dict = Depends(ge
                             detail="User not found or role not assigned")
 
     return {"role": role}
+
+
+@router.get("/role", response_model=TyperUserBase)
+def get_user_role(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    role = get_role_user_login(db, current_user)
+
+    if role is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail="User not found or role not assigned")
+
+    return {"role": role}
+
+
+@router.get("/role", response_model=dict)
+def get_user_role(db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    role = get_role_user_login(db, current_user)
+
+    if role is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail="User not found or role not assigned")
+
+    return {"role": role}

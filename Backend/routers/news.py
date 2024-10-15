@@ -90,3 +90,13 @@ def writer_get_all_news_item(
     writer_id = get_writer_user(db, current_user)
     news_all = writerGetAll(db, writer_id=writer_id)
     return news_all
+
+
+@router.get('/writer/', response_model=list[NewsResponse])
+def writer_get_all_news_item(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)
+):
+    writer_id = get_writer_user(db, current_user)
+    news_all = writerGetAll(db, writer_id=writer_id)
+    return news_all

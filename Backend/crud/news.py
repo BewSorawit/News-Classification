@@ -73,6 +73,7 @@ def update_news(db: Session, news_id: int, news_update: NewsUpdate, editor_id: i
     return news_item
 
 
+
 def getAll(db: Session,) -> News:
     return db.query(News).all()
 

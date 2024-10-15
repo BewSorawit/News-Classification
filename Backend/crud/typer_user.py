@@ -20,3 +20,5 @@ def get_role_user_login(db: Session, current_user: dict):
     if db_new is not None and db_new.typer_user:
         return db_new.typer_user.role
     return None
+
+

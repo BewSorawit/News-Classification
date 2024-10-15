@@ -28,3 +28,4 @@ def get_all_categories(
     get_editor_user(db, current_user)
     category = getAllCategories(db)
     return category
+
