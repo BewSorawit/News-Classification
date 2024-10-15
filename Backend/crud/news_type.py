@@ -11,3 +11,7 @@ def get_news_type_by_status(db: Session, status: StatusEnum) -> NewsType:
             detail=f"News type '{status}' not found."
         )
     return news_type
+
+
+def getAll(db: Session) -> NewsType:
+    return db.query(NewsType).all()
