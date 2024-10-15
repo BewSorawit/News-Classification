@@ -26,6 +26,13 @@ Route::get('/login', function () {
     return view('test-login');
 })->name('login');
 
+// Route::get('/login', function () {
+//     return view('test-login');
+// });
+
+Route::get('/register', function () {
+    return view('register');  //admin
+});
 
 // Route::get('/login', function () {
 //     return view('test-login');
@@ -58,13 +65,7 @@ Route::get('/news/{id}', function ($id) {
     return view('show', ['id' => $id]); //for viewer,writer,editor
 });
 
-Route::get('/login', function () {
-    return view('test-login');
-});
 
-Route::get('/register', function () {
-    return view('register');  //admin
-});
 Route::get('/unlogin', function () {
     return view('unlogin'); // เช็คว่าloginไหม
 });
