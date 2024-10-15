@@ -27,7 +27,7 @@ def get_writer_user(db: Session, current_user: dict) -> Optional[User]:
     if not typer_user or typer_user.role != RoleEnum.writer:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not authorized to create news.",
+            detail="You do not have permission to perform this action.",
         )
 
     return user_id
@@ -40,7 +40,7 @@ def get_editor_user(db: Session, current_user: dict) -> Optional[User]:
     if not typer_user or typer_user.role != RoleEnum.editor:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not authorized to update news.",
+            detail="You do not have permission to perform this action.",
         )
 
     return user_id
@@ -52,7 +52,7 @@ def get_viewer_user(db: Session, current_user: dict) -> Optional[User]:
     if not typer_user or (typer_user.role not in [RoleEnum.viewer, RoleEnum.writer, RoleEnum.editor, RoleEnum.admin]):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not authorized to view news.",
+            detail="You do not have permission to perform this action.",
         )
 
     return user_id

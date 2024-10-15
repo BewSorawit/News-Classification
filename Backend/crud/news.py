@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
-from fastapi import HTTPException,status
+from typing import Optional
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from schemas.category import CategoryCreate
 from crud.categories import create_category, get_category_by_name
@@ -71,10 +72,20 @@ def update_news(db: Session, news_id: int, news_update: NewsUpdate, editor_id: i
     db.refresh(news_item)
     return news_item
 
+
 def getAll(db: Session,) -> News:
     return db.query(News).all()
 
-def getNewsById(db: Session,news_id) -> News:
+
+def getByType(db: Session, news_type_id) -> News:
+    return db.query(News).filter(News.news_type_id == news_type_id).all()
+
+
+def getByTypeEditor(db: Session, news_type_id, usid) -> News:
+    return db.query(News).filter(News.news_type_id == news_type_id).filter(News.editor_id == usid).all()
+
+
+def getNewsById(db: Session, news_id) -> News:
     news = db.query(News).filter(News.id == news_id).first()
 
     if not news:
@@ -82,5 +93,16 @@ def getNewsById(db: Session,news_id) -> News:
             status_code=status.HTTP_404_NOT_FOUND,
             detail="News not found"
         )
-    
+
     return news
+
+
+def writerGetAll(db: Session, writer_id: Optional[int] = None):
+    query = db.query(News)
+    if writer_id is not None:
+        query = query.filter(News.writer_id == writer_id)
+    return query.all()
+
+
+def getByTypeEditor(db: Session, news_type_id, usid) -> News:
+    return db.query(News).filter(News.news_type_id == news_type_id).filter(News.editor_id == usid).all()

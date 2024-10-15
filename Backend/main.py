@@ -10,6 +10,7 @@ from routers.auth import router as auth_router
 from routers.news import router as new_router
 from routers.categories import router as category_router
 from routers.typer_user import router as typer_user_router
+from routers.news_type import router as news_type_router
 
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -17,8 +18,8 @@ import uvicorn
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[""],
-    allow_methods=[""],
+    allow_origins=["*"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -29,6 +30,8 @@ app.include_router(new_router, prefix='/news', tags=['news'])
 app.include_router(category_router, prefix='/categories', tags=['categories'])
 app.include_router(typer_user_router, prefix='/typer_user_router',
                    tags=['typer_user_router'])
+app.include_router(news_type_router, prefix='/news_type',
+                   tags=['news_type'])
 
 app.include_router(auth_router)
 
