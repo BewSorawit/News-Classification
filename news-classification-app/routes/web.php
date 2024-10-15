@@ -34,6 +34,34 @@ Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า ho
         return view('news');
     });
 
+    Route::get('/create-news', function () {
+    return view('create-news');
+    })->name('create.news');
+
+
+Route::get('/news', function () {
+    return view('news');
+});
+Route::get('/news/{id}', function ($id) {
+    return view('show', ['id' => $id]); // ส่งค่า id ไปที่ view
+});
+
+Route::get('/login', function () {
+    return view('test-login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+Route::get('/unlogin', function () {
+    return view('unlogin'); // ใช้ชื่อไฟล์ view ที่สร้างขึ้น
+});
+Route::get('/edit-news/{id}', function ($id) {
+    return view('edit-news', ['id' => $id]); // ส่งค่า id ไปที่ view
+});
+
+
+
 
 
 // กรณีผู้ใช้ระบุpathไม่ถูกต้อง แล้วจะตอบกลับไปยังฝั่งผู้ใช้ (client)

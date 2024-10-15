@@ -61,36 +61,33 @@
                     $('#register-form').on('submit', function(e) {
                         e.preventDefault();  // ป้องกันการ reload หน้า
 
-                        const username = $('#username').val();
-                        const email = $('#email').val();
-                        const password = $('#password').val();
-                        const typer_user_id = 1;  // ตั้งค่า typer_user_id เป็น 4
+                const username = $('#username').val();
+                const email = $('#email').val();
+                const password = $('#password').val();
+                const typer_user_id = $('#role-select').val();  // ดึงค่า role ที่เลือก
 
-                        $.ajax({
-                            url: 'http://localhost:8001/users',
-                            method: 'POST',
-                            contentType: 'application/json',
-                            data: JSON.stringify({
-                                username: username,
-                                email: email,
-                                password: password,
-                                typer_user_id: typer_user_id  // ส่ง typer_user_id เป็น 4
-                            }),
-                            success: function(data) {
-                                // ถ้าสมัครสำเร็จ สามารถเปลี่ยนเส้นทางหรือแสดงข้อความยืนยัน
-                                alert('สมัครสมาชิกสำเร็จ!');
-                                window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
-                            },
-                            error: function(xhr) {
-                                const errorMessage = xhr.responseJSON.detail || 'เกิดข้อผิดพลาดในการสมัครสมาชิก';
-                                $('#error-message').text(errorMessage);
-                            }
-                        });
-                    });
+                $.ajax({
+                    url: 'http://localhost:8001/users',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password,
+                        typer_user_id: typer_user_id  // ส่ง typer_user_id เป็น 4
+                    }),
+                    success: function(data) {
+                        // ถ้าสมัครสำเร็จ สามารถเปลี่ยนเส้นทางหรือแสดงข้อความยืนยัน
+                        alert('สมัครสมาชิกสำเร็จ!');
+                        window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                    },
+                    error: function(xhr) {
+                        const errorMessage = xhr.responseJSON.detail || 'เกิดข้อผิดพลาดในการสมัครสมาชิก';
+                        $('#error-message').text(errorMessage);
+                    }
                 });
-            </script>
-        </body>
-        </html>
-
-@endsection
-
+            });
+        });
+    </script>
+</body>
+</html>
