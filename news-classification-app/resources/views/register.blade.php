@@ -23,6 +23,12 @@
                 <label for="password">รหัสผ่าน</label>
                 <input type="password" class="form-control" id="password" placeholder="กรอกรหัสผ่าน" required>
             </div>
+            <div class="form-group">
+                <label for="role-select">เลือก Role</label>
+                <select class="form-control" id="role-select" required>
+                    <option value="">-- กรุณาเลือก Role --</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">สมัครสมาชิก</button>
         </form>
         <div id="error-message" class="text-danger mt-3"></div>
@@ -30,13 +36,28 @@
 
     <script>
         $(document).ready(function() {
+            // ดึงรายการ Role จาก API
+            $.ajax({
+                url: 'http://localhost:8001/typer_user_router/',  // URL ของ API
+                method: 'GET',
+                success: function(data) {
+                    const roleSelect = $('#role-select');
+                    data.forEach(role => {
+                        roleSelect.append(new Option(role.role, role.id));  // แสดงชื่อ role และใช้ id เป็นค่า
+                    });
+                },
+                error: function() {
+                    alert('ไม่สามารถดึงรายการ Role ได้');
+                }
+            });
+
             $('#register-form').on('submit', function(e) {
                 e.preventDefault();  // ป้องกันการ reload หน้า
 
                 const username = $('#username').val();
                 const email = $('#email').val();
                 const password = $('#password').val();
-                const typer_user_id = 1;  // ตั้งค่า typer_user_id เป็น 4
+                const typer_user_id = $('#role-select').val();  // ดึงค่า role ที่เลือก
 
                 $.ajax({
                     url: 'http://localhost:8001/users',
@@ -46,10 +67,9 @@
                         username: username, 
                         email: email, 
                         password: password,
-                        typer_user_id: typer_user_id  // ส่ง typer_user_id เป็น 4
+                        typer_user_id: parseInt(typer_user_id)  // ส่ง typer_user_id เป็นตัวเลข
                     }),
                     success: function(data) {
-                        // ถ้าสมัครสำเร็จ สามารถเปลี่ยนเส้นทางหรือแสดงข้อความยืนยัน
                         alert('สมัครสมาชิกสำเร็จ!');
                         window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
                     },

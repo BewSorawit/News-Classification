@@ -18,3 +18,7 @@ def get_category_by_name(db: Session, name: str) -> Category:
 
 def fetch_category_by_id(db: Session, id: int) -> Category:
     return db.query(Category).filter(Category.id == id).first()
+
+
+def getAllCategories(db: Session) -> Category:
+    return db.query(Category).all()

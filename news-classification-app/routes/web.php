@@ -40,6 +40,12 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register'); 
 });
+Route::get('/unlogin', function () {
+    return view('unlogin'); // ใช้ชื่อไฟล์ view ที่สร้างขึ้น
+});
+Route::get('/edit-news/{id}', function ($id) { 
+    return view('edit-news', ['id' => $id]); // ส่งค่า id ไปที่ view
+});
 
 
 # sample
