@@ -46,248 +46,27 @@
 
 
             <ul class="navbar-nav ms-auto zero-item " style="display: none;" id="navbar"  >
-                <li class="nav-item zero-item " style="display: none;" >
+
+                <li class="nav-item admin-item " style="display: none;" >
+                    <a class="nav-link" href="{{route('register')}}">
+                        <button type="button" class="btn btn-primary btn-sm">สมัครสมาชิก</button>
+                    </a>
+                </li>
+
+                <li class="nav-item  flex zero-item " style="display: none;" >
                     <a class="nav-link" href="{{route('login')}}">เข้าสู่ระบบ</a>
                 </li>
 
-                <li>
-                    <button id="logout-button" class="btn btn-danger" >
+                <li class="logout-item nav-item"  >
+                    <button id="logout-button" class="btn btn-danger " style="display: none;">
                         ออกจากระบบ
                     </button>
                 </li>
 
-                {{-- <li class="nav-item zero-item " style="display: none;" >
-                    <a class="nav-link" href="{{route('register')}}">
-                        <button type="button" class="btn btn-primary btn-sm">สมัครสมาชิก</button>
-                    </a>
-                </li> --}}
+
+
             </ul>
-        <script>
-            $(document).ready(function() {
-                const accessToken = 'your_access_token_here'; // Replace with actual token
 
-                // Check if token exists
-                if (!accessToken) {
-                    alert('Token not found. Please log in.');
-                    window.location.href = '/login'; // Redirect to login if no token
-                    return;
-                }
-                // จัดการการคลิกปุ่มล็อกเอาท์
-                $('#logout-button').on('click', function() {
-                    // ล้าง token จาก Local Storage
-                    localStorage.removeItem('access_token');
-                    localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
-
-                    // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                    window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
-                });
-
-
-            });
-        </script>
-
-
-
-
-
-            <ul class="navbar-nav ms-auto admin-item " style="display: none;" >
-                <li class="dropdown admin-item"  style="display: none;" >
-
-                    <ul class="dropdown-menu admin-item " style="display: none;" >
-                        <li>
-                            <a class="dropdown-item" href="{{route('register')}}">
-                                <button type="button" class="btn btn-primary btn-sm">สมัครสมาชิกเพิ่ม</button>
-                            </a>
-                        </li>
-                        <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
-                        <li><a class="dropdown-item" href="#">ตั้งค่าโปรไฟล์</a></li>
-
-                        <li>
-                            <button id="logout-button" class="btn btn-danger" >
-                                ออกจากระบบ
-                            </button>
-                        </li>
-
-                        <style>
-                            .dropdown-menu{
-                                margin-left: -150%;
-                            }
-                        </style>
-                    </ul>
-                </li>
-            </ul>
-            <script>
-                $(document).ready(function() {
-                    const accessToken = 'your_access_token_here'; // Replace with actual token
-
-                    // Check if token exists
-                    if (!accessToken) {
-                        alert('Token not found. Please log in.');
-                        window.location.href = '/login'; // Redirect to login if no token
-                        return;
-                    }
-                    // จัดการการคลิกปุ่มล็อกเอาท์
-                    $('#logout-button').on('click', function() {
-                        // ล้าง token จาก Local Storage
-                        localStorage.removeItem('access_token');
-                        localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
-
-                        // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                        window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
-                    });
-
-
-                });
-            </script>
-
-
-
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown editor-item "  style="display: none;" >
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">ข้อมูลบริษัท</a></li>
-                        <li><a class="dropdown-item" href="#">ตั้งค่าข้อมูลบริษัท</a></li>
-                        <li><a class="dropdown-item" href="#">รายการติดตาม</a></li>
-
-                        <li>
-                            <button id="logout-button" class="btn btn-danger" >
-                                ออกจากระบบ
-                            </button>
-                        </li>
-
-                        <style>
-                            .dropdown-menu{
-                                margin-left: -150%;
-                            }
-                        </style>
-                    </ul>
-                </li>
-            </ul>
-            <script>
-                $(document).ready(function() {
-                    const accessToken = 'your_access_token_here'; // Replace with actual token
-
-                    // Check if token exists
-                    if (!accessToken) {
-                        alert('Token not found. Please log in.');
-                        window.location.href = '/login'; // Redirect to login if no token
-                        return;
-                    }
-                    // จัดการการคลิกปุ่มล็อกเอาท์
-                    $('#logout-button').on('click', function() {
-                        // ล้าง token จาก Local Storage
-                        localStorage.removeItem('access_token');
-                        localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
-
-                        // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                        window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
-                    });
-
-
-                });
-            </script>
-
-
-
-
-
-
-
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown writer-item " style="display: none;" >
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">ข้อมูลบริษัท</a></li>
-                        <li><a class="dropdown-item" href="#">ตั้งค่าข้อมูลบริษัท</a></li>
-                        <li><a class="dropdown-item" href="#">รายการติดตาม</a></li>
-
-                        <li>
-                            <button id="logout-button" class="btn btn-danger" >
-                                ออกจากระบบ
-                            </button>
-                        </li>
-
-                        <style>
-                            .dropdown-menu{
-                                margin-left: -150%;
-                            }
-                        </style>
-                    </ul>
-                </li>
-            </ul>
-            <script>
-                $(document).ready(function() {
-                    const accessToken = 'your_access_token_here'; // Replace with actual token
-
-                    // Check if token exists
-                    if (!accessToken) {
-                        alert('Token not found. Please log in.');
-                        window.location.href = '/login'; // Redirect to login if no token
-                        return;
-                    }
-                    // จัดการการคลิกปุ่มล็อกเอาท์
-                    $('#logout-button').on('click', function() {
-                        // ล้าง token จาก Local Storage
-                        localStorage.removeItem('access_token');
-                        localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
-
-                        // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                        window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
-                    });
-
-
-                });
-            </script>
-
-
-
-
-
-
-
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown viewer-item " style="display: none;">
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">ข้อมูลบริษัท</a></li>
-                        <li><a class="dropdown-item" href="#">ตั้งค่าข้อมูลบริษัท</a></li>
-                        <li><a class="dropdown-item" href="#">รายการติดตาม</a></li>
-
-                        <li>
-                            <button id="logout-button" class="btn btn-danger" >
-                                ออกจากระบบ
-                            </button>
-                        </li>
-
-                        <style>
-                            .dropdown-menu{
-                                margin-left: -150%;
-                            }
-                        </style>
-                    </ul>
-                </li>
-            </ul>
-            <script>
-                $(document).ready(function() {
-                    const accessToken = 'your_access_token_here'; // Replace with actual token
-
-                    // Check if token exists
-                    if (!accessToken) {
-                        alert('Token not found. Please log in.');
-                        window.location.href = '/login'; // Redirect to login if no token
-                        return;
-                    }
-                    // จัดการการคลิกปุ่มล็อกเอาท์
-                    $('#logout-button').on('click', function() {
-                        // ล้าง token จาก Local Storage
-                        localStorage.removeItem('access_token');
-                        localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
-
-                        // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                        window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
-                    });
-
-
-                });
-            </script>
 
 
 
@@ -298,7 +77,7 @@
 
     <script>
         $(document).ready(function() {
-            const accessToken = 'your_access_token_here'; // Replace with actual token
+            const accessToken = localStorage.getItem('access_token'); // Replace with actual token
 
             // Check if token exists
             if (!accessToken) {
@@ -315,26 +94,30 @@
                     console.log('Role ของผู้ใช้:', response.role); // แสดงค่า role ใน console
 
                     // แสดงเมนูที่เหมาะสมตาม role ของผู้ใช้
-                    if (response.role === 'viewer') {
+                    if (response.role == 'viewer') {
                         $('.viewer-item').show();
-                        alert('Unable to check user viewer');
+                        $('.logout-item').show();
+                        alert('YOU are login as admin viewer');
                     }
-                    else if (response.role === 'writer') {
+                    else if (response.role == 'writer') {
                         $('.writer-item').show();
-                        alert('Unable to check user writer');
+                        $('.logout-item').show();
+                        alert('YOU are login as admin writer');
                     }
-                    else if (response.role === 'admin') {
+                    else if (response.role == 'Admin') {
                         $('.admin-item').show();
-                        alert('Unable to check user admin');
+                        $('.logout-item').show();
+                        alert('YOU are login as admin');
                     }
-                    else if (response.role === 'editor') {
+                    else if (response.role == 'editor') {
                         $('.editor-item').show();
-                        alert('Unable to check user editor');
+                        $('.logout-item').show();
+                        alert('YOU are login as admin editor');
                     }
                 },
                 error: function() {
                     $('.zero-item').show();
-                    alert('Unable to check user role');
+                    // alert('Unable to check user role');
                     // alert('ไม่สามารถตรวจสอบ role ของผู้ใช้ได้');
                 }
             });

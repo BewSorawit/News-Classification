@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','news')
+@section('title','news_framePage')
 
 @section('content')
 
@@ -26,7 +26,9 @@
             <div class="list-group" id="news-list"></div>
 
             <!-- ปุ่มล็อกเอาท์ -->
-            <li><button id="logout-button" class="btn btn-danger ">ล็อกเอาท์</button></li>
+            {{-- <ul class="navbar-nav ms-auto zero-item " style="display: none;" id="navbar"  > --}}
+                <li><button id="logout-button" class="btn btn-danger nav-item ">ล็อกเอาท์</button></li>
+            {{-- </ul> --}}
         </div>
 
         <script>
@@ -68,7 +70,7 @@
                     localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
 
                     // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                    window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                    window.location.href = '/home'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
                 });
             });
         </script>
