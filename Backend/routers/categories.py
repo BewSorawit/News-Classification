@@ -1,8 +1,8 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from requests import Session
-from crud.categories import fetch_category_by_id
-from routers.user_permissions import get_viewer_user
+from crud.categories import fetch_category_by_id, getAllCategories
+from routers.user_permissions import get_editor_user, get_viewer_user
 from utils.auth import get_current_user
 from database import get_db
 from schemas.category import CategoryResponse
@@ -18,4 +18,13 @@ def get_category_item_by_id(
 ):
     get_viewer_user(db, current_user)
     category = fetch_category_by_id(db, categories_id)
+    return category
+
+
+@router.get('/', response_model=list[CategoryResponse], status_code=status.HTTP_200_OK)
+def get_all_categories(
+        db: Session = Depends(get_db),
+        current_user: dict = Depends(get_current_user)):
+    get_editor_user(db, current_user)
+    category = getAllCategories(db)
     return category

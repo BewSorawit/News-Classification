@@ -5,7 +5,7 @@ from routers.user_permissions import get_editor_user, get_viewer_user, get_write
 from utils.auth import get_current_user
 from schemas.news import NewsCreatedResponse, NewsCreate, NewsUpdate, NewsUpdateResponse, NewsResponse
 from database import get_db
-from crud.news import writerGetAll, create_news, update_news, getAll, getNewsById ,getByType, getByTypeEditor
+from crud.news import writerGetAll, create_news, update_news, getAll, getNewsById, getByType, getByTypeEditor
 
 router = APIRouter()
 
@@ -30,6 +30,7 @@ def get_all_news_item(
     news_all = getAll(db)
     return news_all
 
+
 @router.get('/type/{type_id}', response_model=list[NewsResponse])
 def get_news_type_item(
     type_id: int,
@@ -49,7 +50,6 @@ def get_news_type_editor_item(
     usid=get_editor_user(db, current_user)
     news_all = getByTypeEditor(db, type_id,usid)
     return news_all
-
 
 
 @router.post('/', response_model=NewsCreatedResponse, status_code=status.HTTP_201_CREATED)
