@@ -24,6 +24,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
+    <script>
+        function changeUrl() {
+            // Change the URL to /new-url without reloading the page
+            history.pushState(null, '', '/home');
+        }
+
+        function clearQueryParameters() {
+            // Clear query parameters from the current URL
+            const baseUrl = window.location.pathname;
+            history.replaceState(null, '', baseUrl);
+        }
+    </script>
+
 </head>
 <body>
 
@@ -58,6 +71,8 @@
                     </li>
                 </div>
 
+
+
                 <div class="zero-item mt-2" >
                     <li class="zero-item nav-item  flex  " >
                         <a class="nav-link  zero-item " href="{{route('login')}}">เข้าสู่ระบบ</a>
@@ -68,7 +83,7 @@
                     <li class="logout-item nav-item" id="logout-button" >
                         {{-- <button id="logout-button" class="logout-item " > --}}
                             {{-- <a id="logout-button" class="nav-link logout-item" href="{{route('register')}}"> --}}
-                                <a class="nav-link  logout-item ">ออกจากระบบ</a>
+                                <a onclick="changeUrl()" class="nav-link  logout-item " href="" >ออกจากระบบ</a>
                             {{-- </a> --}}
                         {{-- </button> --}}
                     </li>
@@ -97,17 +112,23 @@
                     console.log('Role ของผู้ใช้:', response.role); // แสดงค่า role ใน console
 
                     // แสดงเมนูที่เหมาะสมตาม role ของผู้ใช้
-                    if (response.role == 'viewer') {
+                    if (response.role == 'Viewer') {
                         $('.viewer-item').show();
                         $('.logout-item').show();
 
+                        $('.admin-item').hide();
+                        $('.writer-item').hide();
+                        $('.editor-item').hide();
                         $('.zero-item').hide();
                         // alert('YOU are login as admin viewer');
                     }
-                    else if (response.role == 'writer') {
+                    else if (response.role == 'Writer') {
                         $('.writer-item').show();
                         $('.logout-item').show();
 
+                        $('.admin-item').hide();
+                        $('.editor-item').hide();
+                        $('.viewer-item').hide();
                         $('.zero-item').hide();
                         // alert('YOU are login as admin writer');
                     }
@@ -115,13 +136,19 @@
                         $('.admin-item').show();
                         $('.logout-item').show();
 
+                        $('.writer-item').hide();
+                        $('.editor-item').hide();
+                        $('.viewer-item').hide();
                         $('.zero-item').hide();
                         // alert('YOU are login as admin');
                     }
-                    else if (response.role == 'editor') {
+                    else if (response.role == 'Editor') {
                         $('.editor-item').show();
                         $('.logout-item').show();
 
+                        $('.admin-item').hide();
+                        $('.writer-item').hide();
+                        $('.viewer-item').hide();
                         $('.zero-item').hide();
                         // alert('YOU are login as admin editor');
                     }
@@ -129,8 +156,12 @@
                 error: function() {
                     $('.zero-item').show(); // for login
 
-                    $('.logout-item').hide();
+                    $('.viewer-item').hide();
+                    $('.writer-item').hide();
                     $('.admin-item').hide();
+                    $('.logout-item').hide();
+
+
                     // alert('Unable to check user role');
                     // alert('ไม่สามารถตรวจสอบ role ของผู้ใช้ได้');
                 }
@@ -145,7 +176,9 @@
                 localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
 
                 // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                // window.location.href = '/home'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+
+                location.replace('/home');
             });
 
 

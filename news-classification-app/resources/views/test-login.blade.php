@@ -33,7 +33,7 @@
             $(document).ready(function() {
                 const accessToken = localStorage.getItem('access_token');
                 if (accessToken) {
-                    window.location.href = '/news';
+                    window.location.href = '/home';
                 }
 
                 $('#login-form').on('submit', function(e) {
@@ -51,7 +51,7 @@
                             localStorage.setItem('access_token', data.access_token);
                             localStorage.setItem('refresh_token', data.refresh_token);
 
-                            location.replace('/news');
+                            location.replace('/home');
                         },
                         error: function() {
                             $('#error-message').text('อีเมลหรือรหัสผ่านไม่ถูกต้อง');

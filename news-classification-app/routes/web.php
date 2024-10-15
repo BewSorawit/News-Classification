@@ -38,5 +38,5 @@ Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า ho
 
 // กรณีผู้ใช้ระบุpathไม่ถูกต้อง แล้วจะตอบกลับไปยังฝั่งผู้ใช้ (client)
 Route::fallback(function() {
-    return "<h1>ไม่พบหน้าเว็บดังกล่าว</h1>";
+    return "<h1>ไม่พบหน้าเว็บดังกล่าว  K  </h1>";
 });
