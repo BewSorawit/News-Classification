@@ -63,13 +63,23 @@
 
                 <div  class="admin-item mt-2">
                     <li class="admin-item nav-item"  >
-                        <a class="nav-link admin-item" href="{{route('register')}}">
+                        <a class=" admin-item nav-link " href="{{route('register')}}">
                             {{-- <button type="button" class="btn btn-primary btn-sm"> --}}
                                 สมัครสมาชิก
                             {{-- </button> --}}
                         </a>
                     </li>
                 </div>
+                {{-- <div  class="admin-item mt-2">
+                    <li class="admin-item nav-item"  >
+                        <a class=" admin-item nav-link " href="๒">
+                                HOHO
+                        </a>
+                    </li>
+                </div> --}}
+
+
+
 
 
 
@@ -78,6 +88,8 @@
                         <a class="nav-link  zero-item " href="{{route('login')}}">เข้าสู่ระบบ</a>
                     </li>
                 </div>
+
+
 
                 <div class="logout-item mt-2" >
                     <li class="logout-item nav-item" id="logout-button" >
