@@ -13,6 +13,7 @@
           background-attachment: fixed;
       }
 
+
   </style>
 
     <title>@yield('title') | HOME  </title>
@@ -45,24 +46,33 @@
 
 
 
-            <ul class="navbar-nav ms-auto zero-item " style="display: none;" id="navbar"  >
+            <ul class="navbar-nav ms-auto " id="navbar"  >
 
-                <li class="nav-item admin-item " style="display: none;" >
-                    <a class="nav-link" href="{{route('register')}}">
-                        <button type="button" class="btn btn-primary btn-sm">สมัครสมาชิก</button>
-                    </a>
-                </li>
+                <div  class="admin-item mt-2">
+                    <li class="admin-item nav-item"  >
+                        <a class="nav-link admin-item" href="{{route('register')}}">
+                            {{-- <button type="button" class="btn btn-primary btn-sm"> --}}
+                                สมัครสมาชิก
+                            {{-- </button> --}}
+                        </a>
+                    </li>
+                </div>
 
-                <li class="nav-item  flex zero-item " style="display: none;" >
-                    <a class="nav-link" href="{{route('login')}}">เข้าสู่ระบบ</a>
-                </li>
+                <div class="zero-item mt-2" >
+                    <li class="zero-item nav-item  flex  " >
+                        <a class="nav-link  zero-item " href="{{route('login')}}">เข้าสู่ระบบ</a>
+                    </li>
+                </div>
 
-                <li class="logout-item nav-item"  >
-                    <button id="logout-button" class="btn btn-danger " style="display: none;">
-                        ออกจากระบบ
-                    </button>
-                </li>
-
+                <div class="logout-item mt-2" >
+                    <li class="logout-item nav-item" id="logout-button" >
+                        {{-- <button id="logout-button" class="logout-item " > --}}
+                            {{-- <a id="logout-button" class="nav-link logout-item" href="{{route('register')}}"> --}}
+                                <a class="nav-link  logout-item ">ออกจากระบบ</a>
+                            {{-- </a> --}}
+                        {{-- </button> --}}
+                    </li>
+                </div>
 
 
             </ul>
@@ -79,13 +89,6 @@
         $(document).ready(function() {
             const accessToken = localStorage.getItem('access_token'); // Replace with actual token
 
-            // Check if token exists
-            if (!accessToken) {
-                alert('Token not found. Please log in.');
-                window.location.href = '/login'; // Redirect to login if no token
-                return;
-            }
-
             $.ajax({
                 url: 'http://localhost:8001/typer_user_router/role',
                 method: 'GET',
@@ -97,26 +100,37 @@
                     if (response.role == 'viewer') {
                         $('.viewer-item').show();
                         $('.logout-item').show();
-                        alert('YOU are login as admin viewer');
+
+                        $('.zero-item').hide();
+                        // alert('YOU are login as admin viewer');
                     }
                     else if (response.role == 'writer') {
                         $('.writer-item').show();
                         $('.logout-item').show();
-                        alert('YOU are login as admin writer');
+
+                        $('.zero-item').hide();
+                        // alert('YOU are login as admin writer');
                     }
                     else if (response.role == 'Admin') {
                         $('.admin-item').show();
                         $('.logout-item').show();
-                        alert('YOU are login as admin');
+
+                        $('.zero-item').hide();
+                        // alert('YOU are login as admin');
                     }
                     else if (response.role == 'editor') {
                         $('.editor-item').show();
                         $('.logout-item').show();
-                        alert('YOU are login as admin editor');
+
+                        $('.zero-item').hide();
+                        // alert('YOU are login as admin editor');
                     }
                 },
                 error: function() {
-                    $('.zero-item').show();
+                    $('.zero-item').show(); // for login
+
+                    $('.logout-item').hide();
+                    $('.admin-item').hide();
                     // alert('Unable to check user role');
                     // alert('ไม่สามารถตรวจสอบ role ของผู้ใช้ได้');
                 }

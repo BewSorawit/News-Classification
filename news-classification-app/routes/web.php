@@ -19,59 +19,22 @@ Route::redirect('/welcom', '/welcome'); // redirect ไปยังหน้า 
 Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า home
 
 
-Route::get('/register',[RegisteredUserController::class , 'create']) -> name('register');
-Route::get('/login',[LoginController::class , 'create']) -> name('login');
+// Route::get('/register',[RegisteredUserController::class , 'create']) -> name('register');
+// Route::get('/login',[LoginController::class , 'create']) -> name('login');
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
+    Route::get('/login', function () {
+        return view('test-login');
+    })->name('login');
 
+    Route::get('/register', function () {
+        return view('register');
+    })->name('register');
 
-#                                                            for call
-// Route::get('/welcome', function () { return view('welcome'); })->name('home');
-
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
+    Route::get('/news', function () {
+        return view('news');
+    });
 
 
-// Route::get('/create-news', function () {
-//     return view('create-news');
-// })->name('create.news');
-
-
-Route::get('/news', function () {
-    return view('news');
-});
-
-// Route::get('/news/{id}', function ($id) {
-//     return view('show', ['id' => $id]); // ส่งค่า id ไปที่ view
-// });
-
-// Route::get('/login', function () {
-//     return view('test-login');
-// });
-
-// Route::get('/register', function () {
-//     return view('register');
-// });
-
-
-
-// Route::middleware([
-//         'auth:sanctum',
-//         config('jetstream.auth_session'),
-//         'verified',
-//     ])->group(function () {
-//             Route::get('/dashboard', function () {
-//                     return Inertia::render('Dashboard');
-//                 })->name('dashboard');
-//             });
 
 // กรณีผู้ใช้ระบุpathไม่ถูกต้อง แล้วจะตอบกลับไปยังฝั่งผู้ใช้ (client)
 Route::fallback(function() {

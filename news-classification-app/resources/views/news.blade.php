@@ -27,14 +27,22 @@
 
             <!-- ปุ่มล็อกเอาท์ -->
             {{-- <ul class="navbar-nav ms-auto zero-item " style="display: none;" id="navbar"  > --}}
-                <li><button id="logout-button" class="btn btn-danger nav-item ">ล็อกเอาท์</button></li>
+                {{-- <li><button id="logout-button" class="btn btn-danger nav-item ">ล็อกเอาท์</button></li> --}}
             {{-- </ul> --}}
         </div>
 
-        <script>
+        {{-- <script>
             $(document).ready(function() {
                 // ดึง token จาก Local Storage
                 const accessToken = localStorage.getItem('access_token');
+
+                 // Check if token exists
+                if (!accessToken) {
+                    alert('Token not found. Please log in.');
+                    window.location.href = '/login'; // Redirect to login if no token
+                    return;
+                }
+
 
                 $.ajax({
                     url: 'http://localhost:8001/news/',  // URL ของ API
@@ -59,21 +67,22 @@
                         });
                     },
                     error: function() {
-                        alert('ไม่สามารถดึงข้อมูลข่าวได้');
+                        alert('ไม่สามารถดึงข้อมูลข่าวได้  news_frames  ');
                     }
                 });
 
-                // จัดการการคลิกปุ่มล็อกเอาท์
+                จัดการการคลิกปุ่มล็อกเอาท์
                 $('#logout-button').on('click', function() {
                     // ล้าง token จาก Local Storage
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
 
                     // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
-                    window.location.href = '/home'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                    window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
                 });
             });
-        </script>
+        </script> --}}
+
     </body>
     </html>
 
