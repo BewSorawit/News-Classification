@@ -1,65 +1,70 @@
 @extends('layouts.app')
-@section('title','Login')
+@section('title','register')
 
 @section('content')
 
-        <!DOCTYPE html>
-        <html lang="th">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>สมัครสมาชิก</title>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        </head>
-        <body>
-            <div class="container mt-5">
-                <h2>สมัครสมาชิก</h2>
-                <form id="register-form">
-                    <div class="form-group">
-                        <label for="username">ชื่อผู้ใช้</label>
-                        <input type="text" class="form-control" id="username" placeholder="กรอกชื่อผู้ใช้" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">อีเมล</label>
-                        <input type="email" class="form-control" id="email" placeholder="กรอกอีเมล" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">รหัสผ่าน</label>
-                        <input type="password" class="form-control" id="password" placeholder="กรอกรหัสผ่าน" required>
-                    </div>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- <title>สมัครสมาชิก</title> --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
 
-                    <div class="form-group mt-3">
-                        <label for="role-select">เลือก Role</label>
-                        <select class="form-control" id="role-select" required>
-                            <option value="">-- กรุณาเลือก Role --</option>
-                        </select>
-                    </div>
 
-                    <button type="submit" class="btn btn-primary">สมัครสมาชิก</button>
-                </form>
-                <div id="error-message" class="text-danger mt-3"></div>
-            </div>
+<body>
 
-            <script>
-                $(document).ready(function() {
-                    // ดึงรายการ Role จาก API
-                    $.ajax({
-                        url: 'http://localhost:8001/typer_user_router/',  // URL ของ API
-                        method: 'GET',
-                        success: function(data) {
-                            const roleSelect = $('#role-select');
-                            data.forEach(role => {
-                                roleSelect.append(new Option(role.role, role.id));  // แสดงชื่อ role และใช้ id เป็นค่า
-                            });
-                        },
-                        error: function() {
-                            alert('ไม่สามารถดึงรายการ Role ได้');
-                        }
+    <div class="content">
+        <div class="container mt-5">
+            <h2>สมัครสมาชิก</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="username">ชื่อผู้ใช้</label>
+                    <input type="text" class="form-control" id="username" placeholder="กรอกชื่อผู้ใช้" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">อีเมล</label>
+                    <input type="email" class="form-control" id="email" placeholder="กรอกอีเมล" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">รหัสผ่าน</label>
+                    <input type="password" class="form-control" id="password" placeholder="กรอกรหัสผ่าน" required>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="role-select">เลือก Role</label>
+                    <select class="form-control" id="role-select" required>
+                        <option value="">-- กรุณาเลือก Role --</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">สมัครสมาชิก</button>
+            </form>
+            <div id="error-message" class="text-danger mt-3"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // ดึงรายการ Role จาก API
+            $.ajax({
+                url: 'http://localhost:8001/typer_user_router/',  // URL ของ API
+                method: 'GET',
+                success: function(data) {
+                    const roleSelect = $('#role-select');
+                    data.forEach(role => {
+                        roleSelect.append(new Option(role.role, role.id));  // แสดงชื่อ role และใช้ id เป็นค่า
                     });
+                },
+                error: function() {
+                    alert('ไม่สามารถดึงรายการ Role ได้');
+                }
+            });
 
-                    $('#register-form').on('submit', function(e) {
-                        e.preventDefault();  // ป้องกันการ reload หน้า
+            $('#register-form').on('submit', function(e) {
+                e.preventDefault();  // ป้องกันการ reload หน้า
 
                 const username = $('#username').val();
                 const email = $('#email').val();
@@ -91,3 +96,5 @@
     </script>
 </body>
 </html>
+
+@endsection
