@@ -25,6 +25,7 @@
               display: flex;
               align-items: center;
               justify-content: center;
+              /* margin-top: 50px */
             }
             canvas {
               border: 2px solid white;
@@ -39,12 +40,12 @@
         <div class="container mt-2">
                 <div class="row justify-content-center">
                     <div class="col-md-8 flex">
-                        <h1>This is HOME page</h1>
+                        <h3>This is HOME page !!!</h3>
                     </div>
                 </div>
         </div>
 
-        <div class="container-game " style="container-game" >
+        <div class="container-game" style="container-game" >
             <canvas width="400" height="400" id="game"></canvas>
         </div>
 
