@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- <title>สมัครสมาชิก</title> --}}
+    <title>สมัครสมาชิก</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
@@ -17,38 +17,31 @@
         }
     </style>
 </head>
-
-
 <body>
-
-    <div class="content">
-        <div class="container mt-5">
-            <h2>สมัครสมาชิก</h2>
-            <form id="register-form">
-                <div class="form-group">
-                    <label for="username">ชื่อผู้ใช้</label>
-                    <input type="text" class="form-control" id="username" placeholder="กรอกชื่อผู้ใช้" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">อีเมล</label>
-                    <input type="email" class="form-control" id="email" placeholder="กรอกอีเมล" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">รหัสผ่าน</label>
-                    <input type="password" class="form-control" id="password" placeholder="กรอกรหัสผ่าน" required>
-                </div>
-
-                <div class="form-group mt-3">
-                    <label for="role-select">เลือก Role</label>
-                    <select class="form-control" id="role-select" required>
-                        <option value="">-- กรุณาเลือก Role --</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary">สมัครสมาชิก</button>
-            </form>
-            <div id="error-message" class="text-danger mt-3"></div>
-        </div>
+    <div class="container mt-5" id="content">
+        <h2>สมัครสมาชิก</h2>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="username">ชื่อผู้ใช้</label>
+                <input type="text" class="form-control" id="username" placeholder="กรอกชื่อผู้ใช้" required>
+            </div>
+            <div class="form-group">
+                <label for="email">อีเมล</label>
+                <input type="email" class="form-control" id="email" placeholder="กรอกอีเมล" required>
+            </div>
+            <div class="form-group">
+                <label for="password">รหัสผ่าน</label>
+                <input type="password" class="form-control" id="password" placeholder="กรอกรหัสผ่าน" required>
+            </div>
+            <div class="form-group">
+                <label for="role-select">เลือก Role</label>
+                <select class="form-control" id="role-select" required>
+                    <option value="">-- กรุณาเลือก Role --</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">สมัครสมาชิก</button>
+        </form>
+        <div id="error-message" class="text-danger mt-3"></div>
     </div>
 
     <script>
@@ -111,18 +104,14 @@
                     url: 'http://localhost:8001/users',
                     method: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify({
-                        username: username,
-                        email: email,
                     headers: { 'Authorization': `Bearer ${accessToken}` }, // แนบ access token ใน header
                     data: JSON.stringify({
                         username: username,
                         email: email,
                         password: password,
-                        typer_user_id: typer_user_id  // ส่ง typer_user_id เป็น 4
+                        typer_user_id: parseInt(typer_user_id)  // ส่ง typer_user_id เป็นตัวเลข
                     }),
                     success: function(data) {
-                        // ถ้าสมัครสำเร็จ สามารถเปลี่ยนเส้นทางหรือแสดงข้อความยืนยัน
                         alert('สมัครสมาชิกสำเร็จ!');
                         window.location.href = '/user'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
                     },

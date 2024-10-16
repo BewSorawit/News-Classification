@@ -115,9 +115,15 @@
                                             // Populate the role dropdown and handle editing
                                             $('.edit-role').each(function() {
                                                 const currentRole = $(this).siblings('.user-role').text();
-                                                const options = roles.map(role => `<option value="${role.id}" ${role.role === currentRole ? 'selected' : ''}>${role.role}</option>`);
+
+                                                // Filter out "Admin" role
+                                                const options = roles
+                                                    .filter(role => role.role !== 'Admin') // Filter out Admin
+                                                    .map(role => `<option value="${role.id}" ${role.role === currentRole ? 'selected' : ''}>${role.role}</option>`);
+
                                                 $(this).html(options.join(''));
                                             });
+
 
                                             // Handle edit button click
                                             $('.edit-user').on('click', function() {

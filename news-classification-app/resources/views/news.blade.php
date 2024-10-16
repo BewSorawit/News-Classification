@@ -187,7 +187,9 @@
                         $('body').show();
                     },
                     error: function() {
-                        alert('ไม่สามารถตรวจสอบ role ของผู้ใช้ได้');
+                        localStorage.removeItem('access_token');
+                            $('#error-message').text('ไม่สามารถตรวจสอบบทบาทผู้ใช้ได้');
+                            window.location.href = '/login';
                     }
                 });
 
