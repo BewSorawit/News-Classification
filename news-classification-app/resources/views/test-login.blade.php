@@ -62,7 +62,8 @@
                                         if (roleData.role === 'Admin') {
                                             window.location.href = '/user'; // ถ้าเป็น admin เรียกหน้า user
                                         } else if (roleData.role !== 'Admin') {
-                                            window.location.href = '/news'; // ถ้าไม่ใช่ admin เรียกหน้า news
+                                            // window.location.href = '/news'; // ถ้าไม่ใช่ admin เรียกหน้า news
+                                            location.replace('/home');
                                         }
 
                                 },

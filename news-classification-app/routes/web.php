@@ -30,20 +30,25 @@ Route::get('/login', function () {
 //     return view('test-login');
 // });
 
-Route::get('/register', function () {
-    return view('register');  //admin
-});
 
 // Route::get('/login', function () {
-//     return view('test-login');
-// });
+    //     return view('test-login');
+    // });
+
+
+
+
+    // Route::get('/register', function () {
+        //     return view('register');
+        // })->name('register');
 
 
 
 
 Route::get('/register', function () {
-    return view('register');
+    return view('register');  //admin
 })->name('register');
+
 
 Route::get('/news', function () {
     return view('news');
@@ -59,7 +64,7 @@ Route::get('/create-news', function () {
 
 Route::get('/news', function () {
     return view('news'); //for viewer,writer,editor
-});
+})->name('news');
 
 Route::get('/news/{id}', function ($id) {
     return view('show', ['id' => $id]); //for viewer,writer,editor
@@ -76,7 +81,7 @@ Route::get('/edit-news/{id}', function ($id) {
 
 Route::get('/user', function () {
     return view('user'); // admin
-});
+})->name('user');
 
 
 

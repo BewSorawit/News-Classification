@@ -70,24 +70,48 @@
                         </a>
                     </li>
                 </div>
-                {{-- <div  class="admin-item mt-2">
+                <div  class="admin-item mt-2">
                     <li class="admin-item nav-item"  >
-                        <a class=" admin-item nav-link " href="๒">
-                                HOHO
+                        <a class=" admin-item nav-link " href="{{route('user')}}">
+                            สมาชิกทั้งหมด
                         </a>
                     </li>
-                </div> --}}
+                </div>
+
+
 
 
                 <div  class="writer-item mt-2">
                     <li class="writer-item nav-item"  >
                         <a class=" writer-item nav-link " href="{{route('create.news')}}">
-                            {{-- <button type="button" class="btn btn-primary btn-sm"> --}}
-                                สมัครสมาชิก
-                            {{-- </button> --}}
+                                create-news
                         </a>
                     </li>
                 </div>
+                <div  class="writer-item mt-2">
+                    <li class="writer-item nav-item"  >
+                        <a class=" writer-item nav-link " href="{{route('news')}}">
+                                news
+                        </a>
+                    </li>
+                </div>
+
+
+
+                <div  class="editor-item mt-2">
+                    <li class="editor-item nav-item"  >
+                        <a class=" editor-item nav-link " href="{{route('news')}}">
+                                news
+                        </a>
+                    </li>
+                </div>
+                {{-- <div  class="editor-item mt-2">
+                    <li class="editor-item nav-item"  >
+                        <a class=" editor-item nav-link " href="{{route('news')}}">
+                                news
+                        </a>
+                    </li>
+                </div> --}}
 
 
 
@@ -179,6 +203,8 @@
                     $('.viewer-item').hide();
                     $('.writer-item').hide();
                     $('.admin-item').hide();
+                    $('.editor-item').hide();
+
                     $('.logout-item').hide();
 
 
