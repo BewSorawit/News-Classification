@@ -69,9 +69,11 @@ Route::get('/news/{id}', function ($id) {
 Route::get('/unlogin', function () {
     return view('unlogin'); // เช็คว่าloginไหม
 });
+
 Route::get('/edit-news/{id}', function ($id) {
     return view('edit-news', ['id' => $id]); // editor
 });
+
 Route::get('/user', function () {
     return view('user'); // admin
 });
