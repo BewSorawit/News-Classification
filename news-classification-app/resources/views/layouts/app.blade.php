@@ -115,9 +115,18 @@
 
 
 
+                <div class="viewer-item mt-2" >
+                    <li class="viewer-item nav-item  flex  " >
+                        <a class="nav-link  viewer-item " href="{{route('news')}}">news</a>
+                    </li>
+                </div>
+
+
+
+
                 <div class="zero-item mt-2" >
                     <li class="zero-item nav-item  flex  " >
-                        <a class="nav-link  zero-item " href="{{route('login')}}">เข้าสู่ระบบ</a>
+                        <a class="nav-link  zero-item " href="{{route('test-login')}}">เข้าสู่ระบบ</a>
                     </li>
                 </div>
 

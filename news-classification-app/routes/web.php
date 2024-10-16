@@ -22,25 +22,25 @@ Route::redirect('/home', '/welcome'); // redirect ไปยังหน้า ho
 // Route::get('/register',[RegisteredUserController::class , 'create']) -> name('register');
 // Route::get('/login',[LoginController::class , 'create']) -> name('login');
 
-Route::get('/login', function () {
-    return view('test-login');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('test-login');
+// })->name('login');
 
 // Route::get('/login', function () {
 //     return view('test-login');
 // });
 
 
-// Route::get('/login', function () {
-    //     return view('test-login');
-    // });
+Route::get('/login', function () {
+    return view('test-login');
+})->name('test-login');
 
 
 
 
-    // Route::get('/register', function () {
-        //     return view('register');
-        // })->name('register');
+// Route::get('/register', function () {
+    //     return view('register');
+    // })->name('register');
 
 
 
