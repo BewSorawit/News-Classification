@@ -131,7 +131,7 @@ def select2Over85(predictions_level_1):
     predictions_level_1[argmax1] = 0
     max2=np.max(predictions_level_1)
     argmax2=np.argmax(predictions_level_1)
-    if(max1>0.85 and max2>0.85):
+    if(max1>0.85 and max2>0.58):
         return [argmax1,argmax2]
 
     return [argmax1,5]
