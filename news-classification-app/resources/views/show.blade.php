@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('title','Login')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -7,11 +12,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
-        #logout-button {
+         /* #logout-button {
             position: absolute;
             top: 20px;
             right: 20px;
-        }
+        } */
 
         #content {
             display: none;
@@ -22,19 +27,19 @@
             text-align: center;
             margin-top: 20px;
             color: red;
-            
+
         }
-        
+
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <div id="user-controls" style="display: none;">
-            <button id="logout-button" class="btn btn-danger">ล็อกเอาท์</button>
+            {{-- <button id="logout-button" class="btn btn-danger">ล็อกเอาท์</button> --}}
             <a href="/news" class="btn btn-secondary mb-3">กลับไปหน้ารายการข่าว</a>
             <button id="edit-news-button" class="btn btn-warning mb-3" style="display: none;">แก้ไขข่าว</button>
         </div>
-        
+
         <div id="content">
             <h1 id="news-title-h1"></h1>
             <p class="text-muted">
@@ -46,7 +51,7 @@
                 <h5 class="text-danger">เหตุผลที่ไม่อนุมัติ: <span id="reason-text"></span></h5>
             </div>
             <p id="news-content"></p>
-            
+
         </div>
 
         <div id="no-content-warning" class="alert alert-danger">
@@ -65,7 +70,7 @@
             // Show user controls and content
             $('#user-controls').show();
             $('#content').show();
-            
+
             const path = window.location.pathname;
             const newsId = path.split('/').pop();
 
@@ -142,7 +147,7 @@
                                 $('#news-title-h1').text(newsData.title);
                                 document.title = newsData.title;
                                 $('#news-content').text(newsData.content);
-                                
+
                                 // Now check if the reason should be displayed
                                 fetchWriterNewsReason().done(function(reasonNews) {
                                     const reasonNewsItem = reasonNews.find(item => item.id === parseInt(newsId));
@@ -285,3 +290,5 @@
     </script>
 </body>
 </html>
+
+@endsection

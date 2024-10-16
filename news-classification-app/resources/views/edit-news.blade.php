@@ -1,3 +1,9 @@
+@extends('layouts.app')
+@section('title','LOL')
+
+@section('content')
+
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -17,14 +23,14 @@
 
             <!-- News Title -->
             <div class="form-group">
-                <label for="title">หัวข้อข่าว</label>
-                <input type="text" class="form-control" id="title" name="title" readonly>
+                <label for="newsTitle">หัวข้อข่าว</label>
+                <input type="text" class="form-control" id="newsTitle" name="title" readonly>
             </div>
 
             <!-- News Content -->
             <div class="form-group">
-                <label for="content">เนื้อหาข่าว</label>
-                <textarea class="form-control" id="content" name="content" rows="5" readonly></textarea>
+                <label for="newsContent">เนื้อหาข่าว</label>
+                <textarea class="form-control" id="newsContent" name="content" rows="5" readonly></textarea>
             </div>
 
             <!-- Status Dropdown -->
@@ -59,7 +65,7 @@
             <button type="submit" class="btn btn-primary">บันทึกการแก้ไข</button>
             <a href="/news" class="btn btn-secondary">ยกเลิก</a>
         </form>
-        
+
         <!-- Logout Button -->
         <button id="logoutButton" class="btn btn-danger mt-3">ออกจากระบบ</button>
     </div>
@@ -82,7 +88,7 @@
             }).done(function (roleData) {
                 if (roleData.role !== 'Editor') {
                     // Redirect to news page if role is not Editor
-                    window.location.href = '/news'; 
+                    window.location.href = '/news';
                     return; // Stop further execution
                 }
 
@@ -104,8 +110,8 @@
                     }
 
                     // Set the title and content in readonly fields
-                    $('#title').val(newsData.title);
-                    $('#content').val(newsData.content);
+                    $('#newsTitle').val(newsData.title); // Updated ID for title
+                    $('#newsContent').val(newsData.content); // Updated ID for content
                     $('#reason').val(newsData.reason);
 
                     // Fetch status options from /news_type/
@@ -236,3 +242,5 @@
     </script>
 </body>
 </html>
+
+@endsection

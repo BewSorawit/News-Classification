@@ -17,13 +17,17 @@
     <link rel="stylesheet" href="/public/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="/js/jquery-3.6.0.min.js"></script> <!-- Ensure this path is correct -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg" style="background-color: #efefef;">
         <div class="container-fluid">
                 <a class="navbar-brand" href="/">JOBIE</a>
 
-                <ul class="navbar-nav">
+                {{-- <ul class="navbar-nav">
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('findUser', ['workType' => 'work']) }}">ค้นหาผู้หางาน</a>
@@ -32,34 +36,19 @@
                         <a class="nav-link" href="{{ route('findUser', ['workType' => 'intern']) }}">ค้นหานักศึกษาฝึกงาน</a>
                     </li>
 
-                </ul>
+                </ul> --}}
+
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{url((Auth::user()->namePicture != '')?('storage/public/'.Auth::user()->namePicture):'images/dummyprofile.png')}}" class="pic">
-                            <style>
-                                .pic{
-                                    width: 30px;
-                                    height: 30px;
-                                    border-radius: 50%;
-                                    object-fit: cover;
-                                }
-                            </style>
-                        </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{route('user.show')}}">โปรไฟล์</a></li>
                             <li><a class="dropdown-item" href="{{route('user.edit')}}">ตั้งค่าโปรไฟล์</a></li>
                             {{-- <li><a class="dropdown-item" href="#">คำเชิญจากบริษัท</a></li> --}}
 
                             <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item" :href="route('logout')"
-                                            onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                                            {{ __('ออกจากระบบ') }}
-                                    </button>
-                            </form>
+                                <button id="logout-button" class="btn btn-danger" >
+                                    ออกจากระบบ
+                                </button>
                             </li>
 
                             <style>
@@ -77,6 +66,21 @@
     <div class="container py-2">
         @yield('content')
     </div>
+
+    <script>
+        $(document).ready(function() {
+                    // จัดการการคลิกปุ่มล็อกเอาท์
+                $('#logout-button').on('click', function() {
+                    // ล้าง token จาก Local Storage
+                    localStorage.removeItem('access_token');
+                    localStorage.removeItem('refresh_token'); // ล้าง refresh_token ถ้ามี
+
+                    // เปลี่ยนเส้นทางไปยังหน้าล็อกอิน
+                    window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                });
+        });
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>

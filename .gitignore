@@ -5,3 +5,4 @@ alice.txt
 GloVe.ipynb
 test.ipynb
 Backend/.env
+Backend/crud/model_category_level_1.h5

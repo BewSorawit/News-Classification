@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('title','สร้างเนื้อหาใหม่')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -66,7 +71,7 @@
 
             document.getElementById("newsForm").addEventListener("submit", function(event) {
                 event.preventDefault(); // ป้องกันการส่งฟอร์มโดยตรง
-                
+
                 const title = document.getElementById("title").value;
                 const content = document.getElementById("content").value;
 
@@ -106,3 +111,5 @@
     </script>
 </body>
 </html>
+
+@endsection

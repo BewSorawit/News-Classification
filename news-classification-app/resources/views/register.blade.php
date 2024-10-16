@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('title','register')
+
+@section('content')
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -6,9 +11,14 @@
     <title>สมัครสมาชิก</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        #content {
+            display: none; /* ซ่อนเนื้อหาทั้งหมด */
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" id="content">
         <h2>สมัครสมาชิก</h2>
         <form id="register-form">
             <div class="form-group">
@@ -36,18 +46,49 @@
 
     <script>
         $(document).ready(function() {
-            // ดึงรายการ Role จาก API
+            const accessToken = localStorage.getItem('access_token'); // ดึง access token จาก localStorage
+
+            // ตรวจสอบว่ามี access token หรือไม่
+            if (!accessToken) {
+                alert('กรุณาเข้าสู่ระบบก่อนที่จะสมัครสมาชิก'); // แจ้งเตือนหากไม่มี token
+                window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                return;
+            }
+
+            // ตรวจสอบ role ของผู้ใช้
             $.ajax({
-                url: 'http://localhost:8001/typer_user_router/',  // URL ของ API
+                url: 'http://localhost:8001/typer_user_router/role', // URL ของ API เพื่อดึง role
                 method: 'GET',
-                success: function(data) {
-                    const roleSelect = $('#role-select');
-                    data.forEach(role => {
-                        roleSelect.append(new Option(role.role, role.id));  // แสดงชื่อ role และใช้ id เป็นค่า
+                headers: { 'Authorization': `Bearer ${accessToken}` }, // แนบ access token ใน header
+                success: function(roleData) {
+                    if (roleData.role !== 'Admin') { // ตรวจสอบว่าถ้า role ไม่ใช่ Admin
+                        alert('คุณไม่มีสิทธิ์เข้าถึงหน้านี้'); // แจ้งเตือน
+                        window.location.href = '/news'; // เปลี่ยนไปหน้า news
+                        return;
+                    }
+
+                    // แสดงเนื้อหาหลังจากตรวจสอบ role
+                    $('#content').show();
+
+                    // ดึงรายการ Role จาก API
+                    $.ajax({
+                        url: 'http://localhost:8001/typer_user_router/',  // URL ของ API
+                        method: 'GET',
+                        headers: { 'Authorization': `Bearer ${accessToken}` }, // แนบ access token ใน header
+                        success: function(data) {
+                            const roleSelect = $('#role-select');
+                            data.forEach(role => {
+                                roleSelect.append(new Option(role.role, role.id));  // แสดงชื่อ role และใช้ id เป็นค่า
+                            });
+                        },
+                        error: function() {
+                            alert('ไม่สามารถดึงรายการ Role ได้');
+                        }
                     });
                 },
                 error: function() {
-                    alert('ไม่สามารถดึงรายการ Role ได้');
+                    alert('ไม่สามารถดึงข้อมูล role ได้');
+                    window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบหากเกิดข้อผิดพลาด
                 }
             });
 
@@ -63,15 +104,16 @@
                     url: 'http://localhost:8001/users',
                     method: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify({ 
-                        username: username, 
-                        email: email, 
+                    headers: { 'Authorization': `Bearer ${accessToken}` }, // แนบ access token ใน header
+                    data: JSON.stringify({
+                        username: username,
+                        email: email,
                         password: password,
                         typer_user_id: parseInt(typer_user_id)  // ส่ง typer_user_id เป็นตัวเลข
                     }),
                     success: function(data) {
                         alert('สมัครสมาชิกสำเร็จ!');
-                        window.location.href = '/login'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
+                        window.location.href = '/user'; // เปลี่ยนไปหน้าเข้าสู่ระบบ
                     },
                     error: function(xhr) {
                         const errorMessage = xhr.responseJSON.detail || 'เกิดข้อผิดพลาดในการสมัครสมาชิก';
@@ -83,3 +125,5 @@
     </script>
 </body>
 </html>
+
+@endsection

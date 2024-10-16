@@ -15,6 +15,9 @@ from routers.news_type import router as news_type_router
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
+import nltk
+nltk.download('punkt_tab')
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
