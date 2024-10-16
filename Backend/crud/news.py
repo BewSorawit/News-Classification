@@ -8,21 +8,26 @@ from crud.news_type import get_news_type_by_status
 from models.news import News
 from schemas.news import NewsCreate, NewsUpdate
 from models.news_type import NewsType, StatusEnum
+from crud.NewsClassification import predictByBjk
 
 
 def create_news(db: Session, news: NewsCreate, writer_id: int) -> News:
 
+    data = news.title+' . '+news.content
+    pred = predictByBjk(data)
+    print("pred",pred)
+
     news_type = get_news_type_by_status(db, StatusEnum.upload)
 
-    category_level_1 = get_category_by_name(db, "news_category1")
+    category_level_1 = get_category_by_name(db, pred[0])
     if category_level_1 is None:
         category_level_1 = create_category(
-            db, CategoryCreate(name="news_category1"))
+            db, CategoryCreate(name=pred[0]))
 
-    category_level_2 = get_category_by_name(db, "news_category2")
+    category_level_2 = get_category_by_name(db, pred[1])
     if category_level_2 is None:
         category_level_2 = create_category(
-            db, CategoryCreate(name="news_category2"))
+            db, CategoryCreate(name=pred[1]))
 
     news_item = News(
         title=news.title,
