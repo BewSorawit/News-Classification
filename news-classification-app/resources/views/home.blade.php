@@ -45,7 +45,7 @@
                 </div>
         </div>
 
-        <div class="container-game" style="container-game" >
+        {{-- <div class="container-game" style="container-game" >
             <canvas width="400" height="400" id="game"></canvas>
         </div>
 
@@ -193,7 +193,7 @@
 
             // start the game
             requestAnimationFrame(loop);
-        </script>
+        </script> --}}
 
     </body>
     </html>
